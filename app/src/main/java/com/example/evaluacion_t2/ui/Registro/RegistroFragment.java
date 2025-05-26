@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.evaluacion_t2.databinding.FragmentGalleryBinding;
+import com.example.evaluacion_t2.databinding.FragmentRegistroBinding;
 
 public class RegistroFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentRegistroBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         RegistroViewModel galleryViewModel =
                 new ViewModelProvider(this).get(RegistroViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentRegistroBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
