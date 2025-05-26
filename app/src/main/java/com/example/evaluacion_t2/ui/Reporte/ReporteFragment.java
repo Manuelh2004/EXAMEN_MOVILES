@@ -12,19 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 
-public class ReporteFragment extends Fragment {
-
-
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        ReporteViewModel homeViewModel =
-                new ViewModelProvider(this).get(ReporteViewModel.class);
-
-
-
-        return  null;
-    }
 
 
 }
