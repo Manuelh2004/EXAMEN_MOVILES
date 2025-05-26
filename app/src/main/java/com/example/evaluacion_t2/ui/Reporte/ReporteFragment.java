@@ -14,8 +14,6 @@ import com.example.evaluacion_t2.databinding.FragmentHomeBinding;
 
 public class ReporteFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ReporteViewModel homeViewModel =

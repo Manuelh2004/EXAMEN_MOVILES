@@ -14,12 +14,12 @@ import com.example.evaluacion_t2.databinding.FragmentGalleryBinding;
 
 public class RegistroFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        /*
         RegistroViewModel galleryViewModel =
                 new ViewModelProvider(this).get(RegistroViewModel.class);
+
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -27,11 +27,8 @@ public class RegistroFragment extends Fragment {
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        *
+         */
+        return null;
     }
 }
