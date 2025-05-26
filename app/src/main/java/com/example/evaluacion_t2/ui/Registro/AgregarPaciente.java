@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
         etApellidoPaterno = (EditText) rootView.findViewById(R.id.etApellidoPaterno);
         etApellidoMaterno = (EditText) rootView.findViewById(R.id.etApellidoMaterno);
         etEdad = (EditText) rootView.findViewById(R.id.etEdad);
-        etAltura = (EditText) rootView.findViewById(R.id.etNombres);
+        etAltura = (EditText) rootView.findViewById(R.id.etAltura);
         etPeso = (EditText) rootView.findViewById(R.id.etPeso);
         etInformacion = (EditText) rootView.findViewById(R.id.etInformacion);
 
@@ -68,7 +69,6 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
     private void RegistrarPaciente() {
         String url = servidor + "registrar_paciente.php";
 
-        // Obtener valores de los campos
         String nombre = etNombre.getText().toString().trim();
         String apellidoPaterno = etApellidoPaterno.getText().toString().trim();
         String apellidoMaterno = etApellidoMaterno.getText().toString().trim();
@@ -78,14 +78,12 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
         String informacion = etInformacion.getText().toString().trim();
         String sexo = spSexo.getSelectedItem().toString();
 
-        // Validación básica de campos vacíos
         if (nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() ||
                 edad.isEmpty() || alturaStr.isEmpty() || pesoStr.isEmpty()) {
             Toast.makeText(getContext(), "Por favor, complete todos los campos obligatorios", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Validar que altura y peso sean float válidos
         float altura, peso;
         try {
             altura = Float.parseFloat(alturaStr);
@@ -95,7 +93,6 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
             return;
         }
 
-        // Crear parámetros para enviar (se pasan como strings)
         RequestParams params = new RequestParams();
         params.put("nombre", nombre);
         params.put("apellido_paterno", apellidoPaterno);
@@ -108,9 +105,11 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(url, params, new AsyncHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
+                Log.d("RegistrarPaciente", "Respuesta servidor: " + response);
                 if (response.contains("exito")) {
                     Toast.makeText(getContext(), "Paciente registrado correctamente", Toast.LENGTH_SHORT).show();
                     LimpiarCampos();
@@ -124,8 +123,6 @@ public class AgregarPaciente extends Fragment implements View.OnClickListener{
                 Toast.makeText(getContext(), "Error en la conexión al servidor", Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
     @Override
