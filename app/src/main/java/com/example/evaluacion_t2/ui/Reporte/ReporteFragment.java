@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.evaluacion_t2.R;
 import com.example.evaluacion_t2.databinding.FragmentReporteBinding;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -69,7 +70,7 @@ public class ReporteFragment extends Fragment {
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 ArrayList<String> labels = new ArrayList<>();
                 ArrayList<Integer> colors = new ArrayList<>();
-                Toast.makeText(getActivity(), "Hola" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Puedes Realizar dezplazamiento a la izquierda" , Toast.LENGTH_LONG).show();
 
                 try {
                     // Parsear el JSON recibido
@@ -93,21 +94,32 @@ public class ReporteFragment extends Fragment {
 
                     BarDataSet dataSet = new BarDataSet(entries, "IMC por Paciente");
                     dataSet.setColors(colors);
+                    dataSet.setValueTextSize(14f);
+                    dataSet.setValueTextColor(Color.BLACK);
+
                     BarData data = new BarData(dataSet);
                     data.setBarWidth(0.9f);
 
                     grafic.setData(data);
                     grafic.setFitBars(true);
                     grafic.getDescription().setEnabled(false);
+                    grafic.setVisibleXRangeMaximum(3); // Muestra solo 5 barras visibles a la vez
+                    grafic.moveViewToX(0);
 
                     XAxis xAxis = grafic.getXAxis();
                     xAxis.setGranularity(1f);
                     xAxis.setGranularityEnabled(true);
                     xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
                     xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                    xAxis.setTextSize(14f); // Tamaño de texto para los labels del eje X
 
                     grafic.getAxisLeft().setAxisMinimum(0f);
+                    grafic.getAxisLeft().setTextSize(14f); // Tamaño del eje Y (opcional)
                     grafic.getAxisRight().setEnabled(false);
+
+                    Legend legend = grafic.getLegend();
+                    grafic.setExtraBottomOffset(10f);
+                    legend.setTextSize(16f); // Tamaño del texto de la leyenda
 
                     grafic.animateY(1000);
                     grafic.invalidate();
